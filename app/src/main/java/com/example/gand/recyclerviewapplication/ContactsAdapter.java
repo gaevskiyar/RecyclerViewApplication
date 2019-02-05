@@ -15,6 +15,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<MockHolder> {
     private Cursor mCursor;
     private OnItemClickListener mListener;
 
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
 
     @NonNull
     @Override
