@@ -1,18 +1,27 @@
 package com.example.gand.recyclerviewapplication.mock;
 
+import com.example.gand.recyclerviewapplication.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import static com.example.gand.recyclerviewapplication.RecyclerFragment.IMAGE;
+
+
 public class MockGenerator {
 
-    public static List<Mock> generate(int coint){
-        List<Mock> mocks = new ArrayList<>(coint);
+    public static Object generate(int type){
         Random random = new Random();
-        for (int i = 0; i < coint; i++) {
-            mocks.add(new Mock(UUID.randomUUID().toString(), random.nextInt(200)));
+        Object mock;
+        switch (type){
+            case IMAGE:
+                mock = new ImgMock(UUID.randomUUID().toString(), 0);
+                break;
+            default:
+                mock = new Mock(UUID.randomUUID().toString(), random.nextInt(200));
         }
-        return mocks;
+        return mock;
     }
 }

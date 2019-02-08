@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.gand.recyclerviewapplication.ContactsAdapter;
+import com.example.gand.recyclerviewapplication.mock.MockAdapter;
 import com.example.gand.recyclerviewapplication.R;
 
 public class MockHolder extends RecyclerView.ViewHolder {
@@ -26,11 +26,11 @@ public class MockHolder extends RecyclerView.ViewHolder {
         mId = mock.getValue();
     }
 
-    public void setListener(final ContactsAdapter.OnItemClickListener listener) {
+    public void setListener(final MockAdapter.OnItemClickListener listener) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnItemClick(mId);
+                listener.onItemClick(mId);
             }
         });
     }
