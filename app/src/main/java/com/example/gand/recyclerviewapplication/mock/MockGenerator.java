@@ -17,7 +17,7 @@ public class MockGenerator {
         Object mock;
         switch (type){
             case IMAGE:
-                mock = new ImgMock(UUID.randomUUID().toString(), 0);
+                mock = new ImgMock(UUID.randomUUID().toString(), 0x2F000000+random.nextInt(0xFFFFFF));
                 break;
             default:
                 mock = new Mock(UUID.randomUUID().toString(), random.nextInt(200));

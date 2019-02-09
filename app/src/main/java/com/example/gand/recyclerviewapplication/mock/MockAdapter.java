@@ -43,12 +43,18 @@ public class MockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case IMAGE:
                 ImgMockHolder imgMockHolder = (ImgMockHolder) viewHolder;
                 ImgMock imgMock = (ImgMock) mMockList.get(i);
-                if (imgMock != null) imgMockHolder.bind(imgMock);
+                if (imgMock != null) {
+                    imgMockHolder.bind(imgMock);
+                    imgMockHolder.setListener(mListener);
+                }
                 break;
             default:
-                MockHolder MockHolder = (MockHolder) viewHolder;
+                MockHolder mockHolder = (MockHolder) viewHolder;
                 Mock mock = (Mock) mMockList.get(i);
-                if (mock != null) MockHolder.bind(mock);
+                if (mock != null) {
+                    mockHolder.bind(mock);
+                    mockHolder.setListener(mListener);
+                }
                 break;
         }
     }
@@ -68,9 +74,21 @@ public class MockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mMockList.size();
     }
 
-    public void addData(Object mock){
+    public void addItem(Object mock){
         mMockList.add(mock);
         notifyDataSetChanged();
+    }
+
+    public void dropItem(Object item){
+        mMockList.remove(item);
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<Object> data, boolean clear){
+        if (clear){
+            mMockList.clear();
+        }
+        mMockList.addAll(data);
     }
 
     public void setListener(OnItemClickListener listener) {
@@ -78,6 +96,6 @@ public class MockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public interface OnItemClickListener{
-        void onItemClick(String id);
+        void onItemClick(Object item);
     };
 }

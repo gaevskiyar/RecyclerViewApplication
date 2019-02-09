@@ -12,7 +12,7 @@ public class ImgMockHolder extends RecyclerView.ViewHolder {
 
     private ImageView mImage;
     private TextView mImgName;
-    private String mName;
+    private ImgMock mMock;
 
     public ImgMockHolder(@NonNull View itemView) {
         super(itemView);
@@ -21,16 +21,16 @@ public class ImgMockHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(ImgMock mock){
-        mImage.setBackgroundColor(0);
-        mName = mock.getName();
-        mImgName.setText("grgerwg");
+        mImage.setBackgroundColor(mock.getBGColor());
+        mMock = mock;
+        mImgName.setText(String.valueOf(mock.getName()));
     }
 
     public void setListener(final MockAdapter.OnItemClickListener listener){
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(mName);
+                listener.onItemClick(mMock);
             }
         });
     }

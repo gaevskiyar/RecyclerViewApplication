@@ -21,38 +21,17 @@ public class MainActivity extends AppCompatActivity implements MockAdapter.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragment = RecyclerFragment.newInstance();
         if(savedInstanceState == null) {
+            fragment = RecyclerFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, fragment)
                     .commit();
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.im_add_img:
-                fragment.addItem(RecyclerFragment.IMAGE);
-                break;
-            case R.id.im_add_text:
-                fragment.addItem(RecyclerFragment.USER);
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_item_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void onItemClick(String id) {
-        Toast.makeText(this, "clicked "+id, Toast.LENGTH_SHORT).show();
+    public void onItemClick(Object item) {
+        fragment.dropItem(item);
     }
 }
